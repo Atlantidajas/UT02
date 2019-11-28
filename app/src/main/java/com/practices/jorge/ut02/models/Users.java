@@ -7,7 +7,7 @@ public class Users {
     ArrayList<User> users = new ArrayList<>();
 
     public void setUser( String name ) {
-        users.add( new User( name) );
+        users.add( new User( name ) );
     }
 
     public void setUser( int id, String name ) {

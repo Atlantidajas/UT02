@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
     public UserAdapter adapter;
     public FloatingActionButton insertButtonUser;
     public AlertDialog.Builder windowsAlertInsertUsert;
+    public AlertDialog.Builder getAlertDialogUpdateUser;
     public EditText nameInsertEditText;
 
     @Override
@@ -118,11 +119,16 @@ public class MainActivity extends Activity {
             case R.id.itemMenuEditar:
                 messageToast(getString(R.string.editButton) +
                         listViewUsers.getItemAtPosition(position));
+                getAlertDialogUpdateUser( position );
+
                 break;
 
             case R.id.itemMenuDelete:
                 messageToast(getString(R.string.eliminar) +
                         listViewUsers.getItemAtPosition(position));
+                         this.users.deteteUser( position );
+                         this.adapter.notifyDataSetChanged();
+
                 break;
 
             default:
@@ -164,6 +170,44 @@ public class MainActivity extends Activity {
         AlertDialog alert = this.windowsAlertInsertUsert.create();
         alert.show();
     }
+
+    public void getAlertDialogUpdateUser(final int position ) {
+
+        this.getAlertDialogUpdateUser = new AlertDialog.Builder(this);
+        this.getAlertDialogUpdateUser.setTitle(R.string.titleWindowsAlertInsertUser);
+        this.getAlertDialogUpdateUser.setMessage(R.string.messageTitleWindowsAlertInsertUser);
+        this.nameInsertEditText = new EditText(this);
+        this.getAlertDialogUpdateUser.setView(nameInsertEditText);
+        this.getAlertDialogUpdateUser.setCancelable(false);
+        this.getAlertDialogUpdateUser.setPositiveButton( R.string.buttonPositiveWindowsAlertInsertUser, new AlertDialog.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+
+                String nameInsert = nameInsertEditText.getText().toString().trim();
+
+                if ((nameInsert.length() != 0)) {
+                    users.getUsers().remove(position);
+                    users.setUser( position, nameInsert );
+                    adapter.notifyDataSetChanged();
+                    messageToast( getString( R.string.messageUserInsertOK ) );
+                } else {
+                    messageToast(getString( R.string.messageTextNoInsertInsertWindowsAlertInsertUser ) );
+                }
+            }
+        })
+                .setNegativeButton(R.string.buttonCancelWindowsAlertInsertUser, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+
+                    }
+                });
+        AlertDialog alert = this.getAlertDialogUpdateUser.create();
+        alert.show();
+    }
+
+
 
     // Muestra una tostada.
     private void messageToast(String mensaje) {
