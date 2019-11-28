@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 
 
     public void onclickButtonInsert(){
-        this.insertButtonUser.setOnClickListener(new View.OnClickListener() {
+        this.insertButtonUser.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, getString(R.string.messageRegistreUser), Snackbar.LENGTH_LONG)
@@ -99,8 +99,8 @@ public class MainActivity extends Activity {
             this.getMenuInflater().inflate(R.menu.menu_main, menu);
 
             // Cambio el título de los menús para incluir el nombre del usuario.
-            menu.findItem(R.id.itemMenuEditar).setTitle(getString( R.string.editButton ) + listViewUsers.getItemAtPosition(position));
-            menu.findItem(R.id.itemMenuDelete).setTitle(getString(R.string.eliminar) + listViewUsers.getItemAtPosition(position));
+            menu.findItem(R.id.itemMenuEditar).setTitle(getString( R.string.editButton  ) + this.users.getUsers().get( position).getName());
+            menu.findItem(R.id.itemMenuDelete).setTitle(getString(R.string.eliminar) + this.users.getUsers().get( position).getName());
 
             // Establezco el título que se muestra en el encabezado del menú.
             menu.setHeaderTitle(R.string.elija_una_opcion);
@@ -120,15 +120,13 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             
             case R.id.itemMenuEditar:
-                messageToast(getString(R.string.editButton) +
-                        listViewUsers.getItemAtPosition(position));
+                messageToast(getString(R.string.editButton) + this.users.getUsers().get( position).getName());
                 getAlertDialogUpdateUser( position );
 
                 break;
 
             case R.id.itemMenuDelete:
-                messageToast(getString(R.string.eliminar) +
-                        listViewUsers.getItemAtPosition(position));
+                messageToast(getString(R.string.eliminar) + this.users.getUsers().get( position).getName());
                          this.users.deteteUser( position );
                          this.adapter.notifyDataSetChanged();
 
@@ -192,9 +190,9 @@ public class MainActivity extends Activity {
                     users.getUsers().remove(position);
                     users.setUser( position, nameInsert );
                     adapter.notifyDataSetChanged();
-                    messageToast( getString( R.string.messageUserInsertOK ) );
+                    messageToast( getString( R.string.messageUserUpdateOK ) );
                 } else {
-                    messageToast(getString( R.string.messageTextNoInsertInsertWindowsAlertInsertUser ) );
+                    messageToast(getString( R.string.messageUserUpdateOK ) );
                 }
             }
         })
@@ -209,8 +207,6 @@ public class MainActivity extends Activity {
         AlertDialog alert = this.getAlertDialogUpdateUser.create();
         alert.show();
     }
-
-
 
     // Muestra una tostada.
     private void messageToast(String mensaje) {

@@ -2,13 +2,16 @@
     <string name="app_name">PR020-MenuContextual</string>
     <string name="title_activity_main">Menú contextual en ListView</string>
 
-    <string name="messageUserInsertOK">Usuario registrado</string>
+
     <string name="messageClickItem">"El usuario que se dispone a modificar o borrar es "</string>
     <string name="editButton">"Editar "</string>
-    <string name="eliminar">"Eliminar "</string>
+    <string name="eliminar">"Eliminado "</string>
     <string name="elija_una_opcion">Elija una opción</string>
 
     <string name="messageRegistreUser">Registro de nuevo usuario</string>
+    <string name="messageUserInsertOK">Usuario registrado</string>
+    <string name="messageUserUpdateOK">Usuario modificado</string>
+
 
 
     <!-- WindowsAlertInsertUsert-->
