@@ -14,10 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.practices.jorge.ut02.controllers.UserAdapter;
+import com.practices.jorge.ut02.models.Users;
+
 public class MainActivity extends Activity {
 
-    // Variables a nivel de clase.
     private ListView lstAlumnos;
+    Users users = new Users();
+    UserAdapter adapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
