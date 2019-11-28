@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> lst, View viewRow,
                                     int posicion, long id) {
                 // Muestro mensaje de que ha pulsado sobre usuario.
-                mostrarTostada(getString(R.string.messageClickItem) + lst.getItemAtPosition( posicion ));
+                messageToast(getString(R.string.messageClickItem) + lst.getItemAtPosition( posicion ));
             }
         });
         // Registro el ListView para que tenga menú contextual.
@@ -116,12 +116,12 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             
             case R.id.itemMenuEditar:
-                mostrarTostada(getString(R.string.editButton) +
+                messageToast(getString(R.string.editButton) +
                         listViewUsers.getItemAtPosition(position));
                 break;
 
             case R.id.itemMenuDelete:
-                mostrarTostada(getString(R.string.eliminar) +
+                messageToast(getString(R.string.eliminar) +
                         listViewUsers.getItemAtPosition(position));
                 break;
 
@@ -139,20 +139,17 @@ public class MainActivity extends Activity {
         this.nameInsertEditText = new EditText(this);
         this.windowsAlertInsertUsert.setView(nameInsertEditText);
         this.windowsAlertInsertUsert.setCancelable(false);
-        this.windowsAlertInsertUsert.setPositiveButton(R.string.buttonPositiveWindowsAlertInsertUser, new AlertDialog.OnClickListener() {
+        this.windowsAlertInsertUsert.setPositiveButton( R.string.buttonPositiveWindowsAlertInsertUser, new AlertDialog.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
 
                 String nameInsert = nameInsertEditText.getText().toString().trim();
 
                 if ((nameInsert.length() != 0)) {
-
                     users.setUser( nameInsert );
-
+                    messageToast( getString( R.string.messageUserInsertOK ) );
                 } else {
-                    Toast.makeText(MainActivity.this,
-                            R.string.messageTextNoInsertInsertWindowsAlertInsertUser,//<-- Message Message No Insert
-                            Toast.LENGTH_SHORT).show();
+                    messageToast(getString( R.string.messageTextNoInsertInsertWindowsAlertInsertUser ) );
                 }
             }
         })
@@ -169,9 +166,10 @@ public class MainActivity extends Activity {
     }
 
     // Muestra una tostada.
-    private void mostrarTostada(String mensaje) {
+    private void messageToast(String mensaje) {
         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
     }
+
 
 
 }
