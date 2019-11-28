@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
-        android:id="@+id/mnuEditar"
-        android:title="@string/editar">
+        android:id="@+id/itemMenuEditar"
+        android:title="@string/editButton">
     </item>
     <item
-        android:id="@+id/mnuEliminar"
+        android:id="@+id/itemMenuDelete"
         android:title="@string/eliminar">
     </item>
 </menu>

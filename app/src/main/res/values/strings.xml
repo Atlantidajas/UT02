@@ -13,8 +13,8 @@
         <item>Rigoberto</item>
         <item>Atanasio</item>
     </string-array>
-    <string name="ha_pulsado_sobre">"Ha pulsado sobre "</string>
-    <string name="editar">"Editar "</string>
+    <string name="messageClickItem">"El usuario que se dispone a modificar o borrar es "</string>
+    <string name="editButton">"Editar "</string>
     <string name="eliminar">"Eliminar "</string>
     <string name="elija_una_opcion">Elija una opción</string>
 </resources>
