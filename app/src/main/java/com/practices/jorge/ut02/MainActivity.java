@@ -49,28 +49,33 @@ public class MainActivity extends Activity {
         this.listViewUsers.setAdapter( this.adapter );
 
 
+        onclickButtonInsert();
+
+        // Creo el adaptador que usará dichos datos y un layout estándar.
+        listViewUsers.setAdapter( this.adapter );
+
+
+        onclickItemList();
+
+        // Registro el ListView para que tenga menú contextual.
+        registerForContextMenu( listViewUsers );
+    }
+
+
+    public void onclickButtonInsert(){
         this.insertButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, getString(R.string.messageRegistreUser), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 getAlertDialogInsertUser();
 
             }
         });
+    }
 
-
-
-        // Datos para el adaptador de la lista.
-        //String[] users = getResources().getStringArray(R.array.alumnos);
-
-
-        //ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, users);
-
-        // Creo el adaptador que usará dichos datos y un layout estándar.
-        listViewUsers.setAdapter( this.adapter );
-
+    public void onclickItemList(){
         // Creo el listener para cuando se hace click en un item de la lista.
         listViewUsers.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -80,15 +85,13 @@ public class MainActivity extends Activity {
                 messageToast(getString(R.string.messageClickItem) + lst.getItemAtPosition( posicion ));
             }
         });
-        // Registro el ListView para que tenga menú contextual.
-        registerForContextMenu( listViewUsers );
     }
 
     @Override
     public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo ) {
 
         // Si se ha hecho LongClick sobre la lista.
-        if (v.getId() == R.id.listViewUsers) {
+        if ( v.getId() == R.id.listViewUsers ) {
             // Obtengo la posición de la lista que se ha pulsado
             int position = ((AdapterContextMenuInfo) menuInfo).position;
 

@@ -8,6 +8,8 @@
     <string name="eliminar">"Eliminar "</string>
     <string name="elija_una_opcion">Elija una opción</string>
 
+    <string name="messageRegistreUser">Registro de nuevo usuario</string>
+
 
     <!-- WindowsAlertInsertUsert-->
     <string name="titleWindowsAlertInsertUser">Registro de nuevo usuario.</string>
