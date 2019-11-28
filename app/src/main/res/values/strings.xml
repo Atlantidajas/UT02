@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PR020-MenuContextual</string>
     <string name="title_activity_main">Menú contextual en ListView</string>
-    <string name="listado_de_alumnos">Listado de Alumnos</string>
+    <!--<string name="listado_de_alumnos">Listado de Alumnos</string>
     <string-array name="alumnos">
         <item>Baldomero</item>
         <item>Gervasio</item>
@@ -12,9 +12,20 @@
         <item>Genaro</item>
         <item>Rigoberto</item>
         <item>Atanasio</item>
-    </string-array>
+    </string-array>-->
     <string name="messageClickItem">"El usuario que se dispone a modificar o borrar es "</string>
     <string name="editButton">"Editar "</string>
     <string name="eliminar">"Eliminar "</string>
     <string name="elija_una_opcion">Elija una opción</string>
+
+
+    <!-- WindowsAlertInsertUsert-->
+    <string name="titleWindowsAlertInsertUser">Registro de nuevo usuario.</string>
+    <string name="messageTitleWindowsAlertInsertUser">Escriba su nombre.</string>
+
+    <string name="messageTextNoInsertInsertWindowsAlertInsertUser">Inténtelo nuevamente.</string>
+
+    <string name="buttonPositiveWindowsAlertInsertUser">Aceptar</string>
+    <string name="buttonCancelWindowsAlertInsertUser">Cancelar</string>
+
 </resources>

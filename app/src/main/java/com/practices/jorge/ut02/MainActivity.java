@@ -1,5 +1,6 @@
 package com.practices.jorge.ut02;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.view.View;
@@ -10,13 +11,25 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.practices.jorge.ut02.controllers.UserAdapter;
+import com.practices.jorge.ut02.models.Users;
 
 public class MainActivity extends Activity {
 
     private ListView listViewUsers;
+    private Users users = new Users();
+    private UserAdapter adapter;
+    private FloatingActionButton insertButtonUser;
+    private AlertDialog.Builder windowsAlertInsertUsert;
+    private EditText nameInsertEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,14 +41,32 @@ public class MainActivity extends Activity {
 
     private void getVistas() {
 
-        listViewUsers = (ListView) findViewById(R.id.listViewUsers);
+        this.insertButtonUser = findViewById(R.id.insertButtonUser);
+        this.listViewUsers = (ListView) findViewById(R.id.listViewUsers);
+        this.adapter = new UserAdapter(this, users.getUsers());
+        this.listViewUsers.setAdapter( this.adapter );
+
+
+        this.insertButtonUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                users.setUser( "Jorge" );
+                users.setUser( "Hugo" );
+            }
+        });
+
+
 
         // Datos para el adaptador de la lista.
-        String[] users = getResources().getStringArray(R.array.alumnos);
+        //String[] users = getResources().getStringArray(R.array.alumnos);
+
+
+        //ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, users);
 
         // Creo el adaptador que usará dichos datos y un layout estándar.
-        ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, users);
-        listViewUsers.setAdapter(adaptador);
+        listViewUsers.setAdapter( this.adapter );
 
         // Creo el listener para cuando se hace click en un item de la lista.
         listViewUsers.setOnItemClickListener(new OnItemClickListener() {
@@ -47,7 +78,7 @@ public class MainActivity extends Activity {
             }
         });
         // Registro el ListView para que tenga menú contextual.
-        registerForContextMenu(listViewUsers);
+        registerForContextMenu( listViewUsers );
     }
 
     @Override
@@ -98,9 +129,47 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    public void getAlertDialogInsertUser() {
+
+        this.windowsAlertInsertUsert = new AlertDialog.Builder(this);
+        this.windowsAlertInsertUsert.setTitle(R.string.titleWindowsAlertInsertUser);
+        this.windowsAlertInsertUsert.setMessage(R.string.messageTitleWindowsAlertInsertUser);
+        this.nameInsertEditText = new EditText(this);
+        this.windowsAlertInsertUsert.setView(nameInsertEditText);
+        this.windowsAlertInsertUsert.setCancelable(false);
+        this.windowsAlertInsertUsert.setPositiveButton(R.string.buttonPositiveWindowsAlertInsertUser, new AlertDialog.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+
+                String nameInsert = nameInsertEditText.getText().toString().trim();
+
+                if ((nameInsert.length() != 0)) {
+
+                    users.setUser( nameInsert );
+
+                } else {
+                    Toast.makeText(MainActivity.this,
+                            R.string.messageTextNoInsertInsertWindowsAlertInsertUser,//<-- Message Message No Insert
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        })
+                .setNegativeButton(R.string.buttonCancelWindowsAlertInsertUser, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+
+                    }
+                });
+        AlertDialog alert = this.windowsAlertInsertUsert.create();
+        alert.show();
+    }
+
     // Muestra una tostada.
     private void mostrarTostada(String mensaje) {
         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
     }
+
 
 }
