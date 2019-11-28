@@ -53,8 +53,8 @@ public class UserAdapter extends BaseAdapter {
 
         User item = items.get(position);
 
-        //TextView txVwName = (TextView) view.findViewById( R.id.txVwName );//<-- Nombre usuario
-       // txVwName.setText( item.getName() );
+        TextView txVwName = (TextView) view.findViewById( R.id.txVwName );//<-- Nombre usuario
+        txVwName.setText( item.getName() );
 
         return view;
     }

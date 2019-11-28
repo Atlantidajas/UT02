@@ -24,17 +24,18 @@ import com.practices.jorge.ut02.models.Users;
 
 public class MainActivity extends Activity {
 
-    private ListView listViewUsers;
-    private Users users = new Users();
-    private UserAdapter adapter;
-    private FloatingActionButton insertButtonUser;
-    private AlertDialog.Builder windowsAlertInsertUsert;
-    private EditText nameInsertEditText;
+    public ListView listViewUsers;
+    public Users users = new Users();
+    public UserAdapter adapter;
+    public FloatingActionButton insertButtonUser;
+    public AlertDialog.Builder windowsAlertInsertUsert;
+    public EditText nameInsertEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Referencia a las vistas.
         getVistas();
     }
@@ -52,8 +53,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                users.setUser( "Jorge" );
-                users.setUser( "Hugo" );
+
+                getAlertDialogInsertUser();
+
             }
         });
 
