@@ -14,61 +14,57 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.practices.jorge.ut02.controllers.UserAdapter;
-import com.practices.jorge.ut02.models.Users;
-
 public class MainActivity extends Activity {
 
-    private ListView lstAlumnos;
-    Users users = new Users();
-    UserAdapter adapter;
-
+    private ListView listViewUsers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Establezco el layout que mostrará la actividad.
         setContentView(R.layout.activity_main);
-        // Obtengo la referencia a las vistas.
+        // Referencia a las vistas.
         getVistas();
     }
 
     private void getVistas() {
-        lstAlumnos = (ListView) findViewById(R.id.lstAlumnos);
-        // Obtengo los datos para el adaptador de la lista.
-        String[] alumnos = getResources().getStringArray(R.array.alumnos);
+
+        listViewUsers = (ListView) findViewById(R.id.listViewUsers);
+
+        // Datos para el adaptador de la lista.
+        String[] users = getResources().getStringArray(R.array.alumnos);
+
         // Creo el adaptador que usará dichos datos y un layout estándar.
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, alumnos);
-        lstAlumnos.setAdapter(adaptador);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, users);
+        listViewUsers.setAdapter(adaptador);
+
         // Creo el listener para cuando se hace click en un item de la lista.
-        lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
+        listViewUsers.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> lst, View vistafila,
+            public void onItemClick(AdapterView<?> lst, View viewRow,
                                     int posicion, long id) {
-                // Informo al usuario sobre que alumno ha pulsado.
-                mostrarTostada(getString(R.string.ha_pulsado_sobre) +
-                        lst.getItemAtPosition(posicion));
+                // Muestro mensaje de que ha pulsado sobre usuario.
+                mostrarTostada(getString(R.string.messageClickItem) + lst.getItemAtPosition( posicion ));
             }
         });
         // Registro el ListView para que tenga menú contextual.
-        registerForContextMenu(lstAlumnos);
+        registerForContextMenu(listViewUsers);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo ) {
+
         // Si se ha hecho LongClick sobre la lista.
-        if (v.getId() == R.id.lstAlumnos) {
+        if (v.getId() == R.id.listViewUsers) {
             // Obtengo la posición de la lista que se ha pulsado
             int position = ((AdapterContextMenuInfo) menuInfo).position;
+
             // Inflo el menú.
             this.getMenuInflater().inflate(R.menu.menu_main, menu);
-            // Cambio el título de los menús para incluir el nombre del alumno.
-            menu.findItem(R.id.mnuEditar).setTitle(getString(R.string.editar) +
-                    lstAlumnos.getItemAtPosition(position));
-            menu.findItem(R.id.mnuEliminar).setTitle(getString(R.string.eliminar) +
-                    lstAlumnos.getItemAtPosition(position));
+
+            // Cambio el título de los menús para incluir el nombre del usuario.
+            menu.findItem(R.id.itemMenuEditar).setTitle(getString( R.string.editButton ) + listViewUsers.getItemAtPosition(position));
+            menu.findItem(R.id.itemMenuDelete).setTitle(getString(R.string.eliminar) + listViewUsers.getItemAtPosition(position));
+
             // Establezco el título que se muestra en el encabezado del menú.
             menu.setHeaderTitle(R.string.elija_una_opcion);
         }
@@ -79,23 +75,26 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        // Obtengo la posición de la lista que se ha pulsado
+
+        // Posición lista pulsado
         int position = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
-        // Dependiendo del menú sobre el que se ha pulsado informo al usuario.
+
+        // Información al usuario sobre menú pulsado.
         switch (item.getItemId()) {
-            case R.id.mnuEditar:
-                mostrarTostada(getString(R.string.editar) +
-                        lstAlumnos.getItemAtPosition(position));
+            
+            case R.id.itemMenuEditar:
+                mostrarTostada(getString(R.string.editButton) +
+                        listViewUsers.getItemAtPosition(position));
                 break;
-            case R.id.mnuEliminar:
+
+            case R.id.itemMenuDelete:
                 mostrarTostada(getString(R.string.eliminar) +
-                        lstAlumnos.getItemAtPosition(position));
+                        listViewUsers.getItemAtPosition(position));
                 break;
+
             default:
-                // Retorno lo que retorne el padre.
                 return super.onContextItemSelected(item);
         }
-        // Retorno que he gestionado yo el evento.
         return true;
     }
 
